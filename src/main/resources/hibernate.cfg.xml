@@ -19,10 +19,7 @@
 		<!-- Database User-Password -->
 		<property name="hibernate.connection.password">java123</property>
 
-		<!-- JDBC connection pool settings ... using built-in test pool 
-		<property name="connection.pool_size">100</property> -->
-		
-		<!-- Set the current session context -->
+
 		<property name="current_session_context_class">thread</property>
 		
 		<!-- Database User-name -->

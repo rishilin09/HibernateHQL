@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "employee")
 public class Employee {
 	
-
 	public Employee() {}
 	
 	public Employee(String empId,String empName, long empSalary, String empDept, String empAddress) {

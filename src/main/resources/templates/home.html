@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Button Example</title>
+<meta charset="UTF-8">
+<title>Button Example</title>
+<link rel="stylesheet" href="/Home.css" th:href="@{/Home.css}">
 </head>
 <body>
-    <form th:action="@{/button1}" method="get">
-        <button type="submit">Button 1</button>
-    </form>
-    <form th:action="@{/button2}" method="get">
-        <button type="submit">Button 2</button>
-    </form>
-    <form th:action="@{/button3}" method="get">
-        <button type="submit">Button 3</button>
-    </form>
-    <form th:action="@{/button4}" method="get">
-        <button type="submit">Button 4</button>
-    </form>
+
+	<h1>WELCOME TO THE HIBERNATE FRAMEWORK DEMONSTRATION</h1>
+	<div class="button-row">
+		<button type="button" class="button-create">
+			<a th:href="@{/create}">CREATE</a>
+		</button>
+		<button type="button" class="button-read-all">
+			<a th:href="@{/read}">READ-ALL</a>
+		</button>
+		<button type="button" class="button-update-one">
+			<a th:href="@{/update}">UPDATE</a>
+		</button>
+		<button type="button" class="button-delete-one">
+			<a th:href="@{/delete}">DELETE</a>
+		</button>
+		<button type="button" class="button-read-only-one">
+			<a th:href="@{/readOne}">READ ONE</a>
+		</button>
+	</div>
 </body>
 </html>

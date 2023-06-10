@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.spitSpring.HiberanateHQL.hibernate.entity.Employee;
 import com.spitSpring.HiberanateHQL.service.HibernateService;
 
 @RestController
-@RequestMapping(value = "/home/methods")
+@RequestMapping(value = "/")
 public class HibernateController {
 	
 	@Autowired
@@ -18,6 +20,55 @@ public class HibernateController {
 	public HibernateController(HibernateService hibServ) {
 		super();
 		this.hibServ = hibServ;
+	}
+	
+	@GetMapping(value = "/home")
+	public ModelAndView HomePage() {
+		ModelAndView mav = new ModelAndView("Home");
+		return mav;
+	}
+	
+	@GetMapping(value = "/create")
+	public ModelAndView CreatePage() {
+		ModelAndView mav = new ModelAndView("Create");
+		mav.addObject("emp",new Employee());
+		return mav;
+	}
+	
+	@PostMapping(value = "/create")
+	public ModelAndView saveEmployee(@ModelAttribute Employee emp) {
+		ModelAndView mav = new ModelAndView("Create");
+		if(hibServ.insertEmployee(emp)){
+			mav.addObject("result","Data successfully stored!!");
+		} else {
+			mav.addObject("result","Error in uploading the data!!");
+		}
+		return mav;
+	}
+	
+	@GetMapping(value = "/read")
+	public ModelAndView ReadPage() {
+		ModelAndView mav = new ModelAndView("Read");
+		return mav;
+	}
+	
+	@GetMapping(value = "/update")
+	public ModelAndView UpdatePage() {
+		ModelAndView mav = new ModelAndView("Update");
+		mav.addObject("emp",new Employee());
+		return mav;
+	}
+	
+	@GetMapping(value = "/delete")
+	public ModelAndView DeletePage() {
+		ModelAndView mav = new ModelAndView("Delete");
+		return mav;
+	}
+	
+	@GetMapping(value = "/readOne")
+	public ModelAndView ReadOnePage() {
+		ModelAndView mav = new ModelAndView("ReadOne");
+		return mav;
 	}
 	
 	@GetMapping(value = "/fetch")
@@ -30,14 +81,8 @@ public class HibernateController {
 		}
 	}
 
-	@PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String saveEmployee(@RequestBody Employee emp) {
-		if(hibServ.insertEmployee(emp)){
-			return "Data successfully stored!!";
-		} else {
-			return "Error in uploading the data";
-		}
-	}
+//	@PostMapping(value = "/save", consumes = {MediaType.APPLICATION_JSON_VALUE})
+	
 	
 	@PostMapping(value = "/fetchByID")
 	public Object getEmployeeById(@RequestParam(name = "id") String Id) {
