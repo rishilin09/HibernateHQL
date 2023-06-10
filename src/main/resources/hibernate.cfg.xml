@@ -11,7 +11,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
 		<!-- Connection string for connectivity with the database -->
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernatedb</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernatedb?useSSL=false</property>
 
 		<!-- Database User-name -->
 		<property name="hibernate.connection.username">java_user</property>
@@ -19,6 +19,12 @@
 		<!-- Database User-Password -->
 		<property name="hibernate.connection.password">java123</property>
 
+		<!-- JDBC connection pool settings ... using built-in test pool -->
+		<property name="connection.pool_size">1</property>
+		
+		<!-- Set the current session context -->
+		<property name="current_session_context_class">thread</property>
+		
 		<!-- Database User-name -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
