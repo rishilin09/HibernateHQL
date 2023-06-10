@@ -9,5 +9,9 @@ public interface HibernateService {
 	public List<Employee> getAllEmployees();
 
 	public boolean insertEmployee(Employee emp);
+	
+	public Employee getEmployeebyId(String Id);
+	
+	public boolean updateEmployee(Employee emp);
 
 }

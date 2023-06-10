@@ -39,4 +39,23 @@ public class HibernateController {
 			return "Error in uploading the data";
 		}
 	}
+	
+	@PostMapping(value = "/fetchByID")
+	public Object getEmployeeById(@RequestParam(name = "id") String Id) {
+		Employee getEmp = hibServ.getEmployeebyId(Id);
+		if(getEmp != null){
+			return getEmp;
+		} else {
+			return "No Data Found with this ID!!";
+		}
+	}
+	
+	@PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Object getEmployeeById(@RequestBody Employee emp) {
+		if(hibServ.updateEmployee(emp)){
+			return "DATA GOT UPDATED SUCCESSFULLY!!";
+		} else {
+			return "DATA DIDN'T GOT UPDATED!!";
+		}
+	}
 }

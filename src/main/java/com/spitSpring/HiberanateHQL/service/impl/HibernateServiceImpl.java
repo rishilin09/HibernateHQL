@@ -33,5 +33,18 @@ public class HibernateServiceImpl implements HibernateService{
 		return false;
 	}
 
+	@Override
+	public Employee getEmployeebyId(String Id) {
+		return empDao.getEmployeeById(Id);
+	}
+
+	@Override
+	public boolean updateEmployee(Employee emp) {
+		if (empDao.updateEmployee(emp)) {
+			return true;
+		}
+		return false;
+	}
+
 
 }
