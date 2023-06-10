@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import com.spitSpring.HiberanateHQL.hibernate.entity.Employee;
 import com.spitSpring.HiberanateHQL.service.HibernateService;
 
 @RestController
-@RequestMapping(value = "/")
+@RequestMapping(value = "/home/methods")
 public class HibernateController {
 	
 	@Autowired
