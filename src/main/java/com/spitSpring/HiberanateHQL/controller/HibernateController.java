@@ -59,7 +59,7 @@ public class HibernateController {
 		}
 	}
 	
-	@PostMapping(value = "/deleteById")
+	@DeleteMapping(value = "/deleteById")
 	public Object deleteEmployeeById(@RequestParam(name = "id") String Id) {
 		if(hibServ.deleteEmployeebyId(Id)){
 			return "DATA GOT DELETED SUCCESSFULLY!!!";
