@@ -3,7 +3,9 @@ package com.spitSpring.HiberanateHQL.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,12 +34,14 @@ public class HibernateController {
 	public ModelAndView CreatePage() {
 		ModelAndView mav = new ModelAndView("Create");
 		mav.addObject("emp",new Employee());
+		mav.addObject("result","");
 		return mav;
 	}
 	
 	@PostMapping(value = "/create")
 	public ModelAndView saveEmployee(@ModelAttribute Employee emp) {
 		ModelAndView mav = new ModelAndView("Create");
+		mav.addObject("emp",new Employee());
 		if(hibServ.insertEmployee(emp)){
 			mav.addObject("result","Data successfully stored!!");
 		} else {

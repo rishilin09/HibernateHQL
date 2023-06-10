@@ -3,54 +3,12 @@
 <head>
   <title>Employee Form</title>
   <link rel="stylesheet" href="/Create.css" th:href="@{/Create.css}">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-    }
-
-    .form-container {
-      max-width: 400px;
-      margin: 0 auto;
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-    }
-
-    .form-group input[type="submit"] {
-      background-color: #4CAF50;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    .form-group input[type="submit"]:hover {
-      background-color: #45a049;
-    }
-  </style>
 </head>
 <body>
 
 <div class="form-container">
   <h2>Employee Form</h2>
-  <form th:action="@{/methods/save}" method="post" th:object="${emp}">
+  <form th:action="@{/create}" method="post" th:object="${emp}">
   <div class="form-group">
       <label for="empDepartment">Employee ID:</label>
       <input type="text" id="empDept" name="empId" required th:field="*{empId}">
@@ -76,7 +34,6 @@
     </div>
   </form>
 </div>
-
 
 <h1 th:text = ${result}></h1>
 </body>
