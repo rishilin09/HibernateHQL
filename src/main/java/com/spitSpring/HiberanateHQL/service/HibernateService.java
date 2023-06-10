@@ -13,5 +13,7 @@ public interface HibernateService {
 	public Employee getEmployeebyId(String Id);
 	
 	public boolean updateEmployee(Employee emp);
+	
+	public boolean deleteEmployeebyId(String empId);
 
 }

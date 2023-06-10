@@ -50,12 +50,21 @@ public class HibernateController {
 		}
 	}
 	
-	@PostMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Object getEmployeeById(@RequestBody Employee emp) {
 		if(hibServ.updateEmployee(emp)){
 			return "DATA GOT UPDATED SUCCESSFULLY!!";
 		} else {
 			return "DATA DIDN'T GOT UPDATED!!";
+		}
+	}
+	
+	@PostMapping(value = "/deleteById")
+	public Object deleteEmployeeById(@RequestParam(name = "id") String Id) {
+		if(hibServ.deleteEmployeebyId(Id)){
+			return "DATA GOT DELETED SUCCESSFULLY!!!";
+		} else {
+			return "DATA DIDN'T GOT DELETED!!";
 		}
 	}
 }

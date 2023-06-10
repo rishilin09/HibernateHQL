@@ -24,7 +24,7 @@ public class EmployeeDAO {
 		}
 	}
 
-	public boolean insertData(Employee emp) {
+	public boolean insertEmployeeData(Employee emp) {
 		Transaction transaction = null;
 		try {
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -66,7 +66,7 @@ public class EmployeeDAO {
 		}
 	}
 
-	public boolean updateEmployee(Employee emp) {
+	public boolean updateEmployeeData(Employee emp) {
 		Transaction transaction = null;
 		try {
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -93,6 +93,35 @@ public class EmployeeDAO {
 			}
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public boolean deleteEmployeeByID(String EmpId) {
+		Transaction transaction = null;
+		try {
+			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			Employee employee = getEmployeeById(EmpId);
+			if(employee == null) {
+				return false;
+			} else {
+				String queryStr = "DELETE FROM Employee E WHERE E.empId = :employee_Id";
+				Query<Employee> query = session.createQuery(queryStr);
+				query.setParameter("employee_Id", EmpId);
+				int result = query.executeUpdate();
+				System.out.println(result);
+				transaction.commit();
+				return true;
+			}
+			
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+				return false;
+			}
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 }

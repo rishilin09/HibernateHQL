@@ -27,7 +27,7 @@ public class HibernateServiceImpl implements HibernateService{
 
 	@Override
 	public boolean insertEmployee(Employee emp) {
-		if(empDao.insertData(emp)) {
+		if(empDao.insertEmployeeData(emp)) {
 			return true;
 		}
 		return false;
@@ -40,7 +40,15 @@ public class HibernateServiceImpl implements HibernateService{
 
 	@Override
 	public boolean updateEmployee(Employee emp) {
-		if (empDao.updateEmployee(emp)) {
+		if (empDao.updateEmployeeData(emp)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteEmployeebyId(String empId) {
+		if (empDao.deleteEmployeeByID(empId)) {
 			return true;
 		}
 		return false;
