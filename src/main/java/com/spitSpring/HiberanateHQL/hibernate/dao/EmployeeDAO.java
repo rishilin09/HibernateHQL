@@ -3,7 +3,6 @@ package com.spitSpring.HiberanateHQL.hibernate.dao;
 import java.util.List;
 
 import org.hibernate.*;
-import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Service;
 
 import com.spitSpring.HiberanateHQL.hibernate.entity.Employee;
@@ -38,8 +37,10 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			if (transaction != null) {
 				transaction.rollback();
+				return false;
 			}
 			throw new RuntimeException(e);
 		}
 	}
+	
 }

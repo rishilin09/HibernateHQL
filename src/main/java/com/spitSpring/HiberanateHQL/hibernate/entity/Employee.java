@@ -1,6 +1,5 @@
 package com.spitSpring.HiberanateHQL.hibernate.entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +9,9 @@ public class Employee {
 
 	public Employee() {}
 	
-	public Employee(String empName, long empSalary, String empDept, String empAddress) {
+	public Employee(String empId,String empName, long empSalary, String empDept, String empAddress) {
 		super();
+		this.empId = empId;
 		this.empName = empName;
 		this.empSalary = empSalary;
 		this.empDept = empDept;
@@ -19,7 +19,10 @@ public class Employee {
 	}
 	
 	
-	private Long empId;
+	private Long Srno;
+	
+	
+	private String empId;
 	
 	
 	private long empSalary;
@@ -35,12 +38,22 @@ public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Srno")
+	public Long getSrno() {
+		return Srno;
+	}
+
+	public void setSrno(Long Srno) {
+		this.Srno = Srno;
+	}
+	
+	
 	@Column(name = "empId")
-	public Long getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(Long empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 	
@@ -89,47 +102,3 @@ public class Employee {
 				+ ", empDept=" + empDept + ", empAddress=" + empAddress + "]";
 	}
 }
-//package com.spitSpring.HiberanateHQL.hibernate.entity;
-//
-//
-//import jakarta.persistence.*;
-//
-//@Entity
-//@Table(name = "employee")
-//public class Employee {
-//	
-//
-//	public Employee() {}
-//	
-//	public Employee(String empName, long empSalary, String empDept, String empAddress) {
-//		super();
-//		this.empName = empName;
-//		this.empSalary = empSalary;
-//		this.empDept = empDept;
-//		this.empAddress = empAddress;
-//	}
-//	
-//	@Id
-//	@Access(AccessType.FIELD)
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name = "empId")
-//	public Long empId;
-//	
-//	@Column(name = "empName")
-//	public String empName;
-//	
-//	@Column(name = "empSalary")
-//	public long empSalary;
-//	
-//	@Column(name = "empDept")
-//	public String empDept;
-//	
-//	@Column(name = "empAddress")
-//	public String empAddress;
-//	
-//	@Override
-//	public String toString() {
-//		return "Employee [empId=" + empId + ", empName=" + empName + ", empSalary=" + empSalary
-//				+ ", empDept=" + empDept + ", empAddress=" + empAddress + "]";
-//	}
-//}
