@@ -55,11 +55,11 @@ button {
 }
 
 button:hover {
-	background-color: #45a049;
+	background-color: #9EE718;
 }
 
 button:active {
-	background-color: #3e8e41;
+	background-color: rgb(20, 235, 170);
 }
 
 .container {

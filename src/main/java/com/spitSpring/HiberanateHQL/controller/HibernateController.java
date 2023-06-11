@@ -24,7 +24,7 @@ public class HibernateController {
 		this.hibServ = hibServ;
 	}
 	
-	@GetMapping(value = "/home")
+	@GetMapping(value = {"/","/home"})
 	public ModelAndView HomePage() {
 		ModelAndView mav = new ModelAndView("Home");
 		return mav;
@@ -53,6 +53,12 @@ public class HibernateController {
 	@GetMapping(value = "/read")
 	public ModelAndView ReadPage() {
 		ModelAndView mav = new ModelAndView("Read");
+		List<Employee> employees = hibServ.getAllEmployees();
+		if(employees != null) {
+			mav.addObject("emp",employees);
+		} else {
+			mav.addObject("error","No Data to get list down!!");
+		}
 		return mav;
 	}
 	
@@ -63,15 +69,18 @@ public class HibernateController {
 		return mav;
 	}
 	
-	@GetMapping(value = "/delete")
+	@GetMapping(value = "/deleteById")
 	public ModelAndView DeletePage() {
 		ModelAndView mav = new ModelAndView("Delete");
+		mav.addObject("emp",new Employee());
+		mav.addObject("result","");
 		return mav;
 	}
 	
-	@GetMapping(value = "/readOne")
+	@GetMapping(value = "/fetchByID")
 	public ModelAndView ReadOnePage() {
 		ModelAndView mav = new ModelAndView("ReadOne");
+		mav.addObject("emp",new Employee());
 		return mav;
 	}
 	
@@ -84,22 +93,23 @@ public class HibernateController {
 			return "Cannot fetch the data!!!";
 		}
 	}
-
-//	@PostMapping(value = "/save", consumes = {MediaType.APPLICATION_JSON_VALUE})
-	
 	
 	@PostMapping(value = "/fetchByID")
-	public Object getEmployeeById(@RequestParam(name = "id") String Id) {
-		Employee getEmp = hibServ.getEmployeebyId(Id);
+	public ModelAndView getEmployeeById(@ModelAttribute Employee emp) {
+		Employee getEmp = hibServ.getEmployeebyId(emp.getEmpId());
+		ModelAndView mav = new ModelAndView("ReadOne");
 		if(getEmp != null){
-			return getEmp;
+			mav.addObject("emp",getEmp);
+			mav.addObject("result","");
 		} else {
-			return "No Data Found with this ID!!";
+			mav.addObject("emp",new Employee());
+			mav.addObject("result","No Data Found with this ID!!");
 		}
+		return mav;
 	}
 	
 	@PutMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Object getEmployeeById(@RequestBody Employee emp) {
+	public Object updateEmployeeById(@RequestBody Employee emp) {
 		if(hibServ.updateEmployee(emp)){
 			return "DATA GOT UPDATED SUCCESSFULLY!!";
 		} else {
@@ -107,12 +117,42 @@ public class HibernateController {
 		}
 	}
 	
-	@DeleteMapping(value = "/deleteById")
-	public Object deleteEmployeeById(@RequestParam(name = "id") String Id) {
-		if(hibServ.deleteEmployeebyId(Id)){
-			return "DATA GOT DELETED SUCCESSFULLY!!!";
+	@PostMapping(value = "/deleteById")
+	public ModelAndView deleteEmployeeById(@ModelAttribute Employee emp) {
+		ModelAndView mav = new ModelAndView("Delete");
+		mav.addObject("emp",new Employee());
+		if(hibServ.deleteEmployeebyId(emp.getEmpId())){
+			mav.addObject("result","DATA GOT DELETED SUCCESSFULLY!!!");
 		} else {
-			return "DATA DIDN'T GOT DELETED!!";
+			mav.addObject("result","DATA DIDN'T GOT DELETED!!");
 		}
+		return mav;
 	}
+	
+//	@DeleteMapping(value = "/deleteById")
+//	public Object deleteEmployeeById(@RequestParam(name = "id") String Id) {
+//		if(hibServ.deleteEmployeebyId(Id)){
+//			return "DATA GOT DELETED SUCCESSFULLY!!!";
+//		} else {
+//			return "DATA DIDN'T GOT DELETED!!";
+//		}
+//	}
 }
+
+
+//@GetMapping(value = "/readOne")
+//public ModelAndView readOnePage(Model model) {
+//    ModelAndView mav = new ModelAndView("ReadOne");
+//    mav.addObject("oneemp", new Employee());
+//    return mav;
+//}
+//
+//@PostMapping(value = "/readOne")
+//public ModelAndView getReadOnePage(@RequestParam(name = "id") String id, Model model) {
+//    Employee retrievedEmployee = hibServ.getEmployeebyId(id);
+//    model.addAttribute("oneemp", retrievedEmployee);
+//    ModelAndView mav = new ModelAndView("ReadOne");
+//    mav.addObject("id", id);
+//    return mav;
+//}
+

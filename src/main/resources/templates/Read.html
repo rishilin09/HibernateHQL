@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Get all employees</title>
+<link rel="stylesheet" href="/Read.css" th:href="@{/Read.css}">
 </head>
 <body>
-<h1>Hello READ</h1>
+	<div th:if="${emp.size() != 0}">
+		<h1>EMPLOYEE DETAILS</h1>
+		<div class="table">
+			<table>
+				<thead>
+					<tr>
+						<th>Employee ID</th>
+						<th>Employee Name</th>
+						<th>Employee Department</th>
+						<th>Salary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="employee : ${emp}">
+						<td th:text="${employee.empId}"></td>
+						<td th:text="${employee.empName}"></td>
+						<td th:text="${employee.empDept}"></td>
+						<td th:text="${employee.empSalary}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+	<div th:unless="${emp.size() != 0}">
+		<h1 th:text=${error}></h1>
+	</div>
 </body>
 </html>
+
+<!--  <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Read One Page</title>
+    <script th:inline="javascript">
+        function getIdFromAlert() {
+            var id = prompt('Enter Employee ID:');
+            if (id) {
+                document.getElementById('idInput').value = id;
+                document.getElementById('myForm').submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="getIdFromAlert()">Set ID</button>
+    <hr>
+    <h2>Employee Details</h2>
+    <form id="myForm" action="/readOne" method="post">
+        <input type="hidden" id="idInput" name="id">
+        <p>ID: <span th:text="${id}"></span></p>
+        <p>Name: <span th:text="${oneemp.empName}"></span></p>
+        <p>Dept: <span th:text="${oneemp.empDept}"></span></p>
+        <p>Salary: <span th:text="${oneemp.empSalary}"></span></p>
+        <p>Address: <span th:text="${oneemp.empAddress}"></span></p>
+    </form>
+</body>
+</html> -->
+

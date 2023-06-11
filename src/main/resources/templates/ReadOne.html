@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <title>Employee Form</title>
+  <link rel="stylesheet" href="/ReadOne.css" th:href="@{/ReadOne.css}">
 </head>
 <body>
-<h1>Hello READone</h1>
+
+<div class="form-container">
+  <h2>SEARCH BY ID</h2>
+  <form th:action="@{/fetchByID}" method="post" th:object="${emp}">
+  	<div class="form-group">
+      <label for="empDepartment">Enter the Employee ID:</label>
+      <input type="text" id="empId" name="empId" required th:field="*{empId}">
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+<div th:object="${emp}">
+<div th:if="${emp != null}" class="table">
+	<table>
+		<thead>
+			<tr>
+				<th>Srno</th>
+				<th>Employee Id</th>
+				<th>Employee Name</th>
+				<th>Employee Department</th>
+				<th>Employee Salary</th>
+				<th>Employee Address</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr >
+				<td th:text="*{Srno}"></td>
+				<td th:text="*{empId}"></td>
+				<td th:text="*{empName}"></td>
+				<td th:text="*{empDept}"></td>
+				<td th:text="*{empSalary}"></td>
+				<td th:text="*{empAddress}"></td>
+			</tr>
+			
+		</tbody>
+	</table>
+</div>
+</div>
+<div th:unless="${emp == null}">
+	<h1 class="error-result" th:text = ${result}></h1>
+</div>
 </body>
 </html>

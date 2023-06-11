@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+  <title>Employee Form</title>
+  <link rel="stylesheet" href="/Delete.css" th:href="@{/Delete.css}">
 </head>
 <body>
-<h1>Hello DELETE</h1>
+
+<div class="form-container">
+  <h2>DELETE BY ID</h2>
+  <form th:action="@{/deleteById}" method="post" th:object="${emp}">
+  	<div class="form-group">
+      <label for="empDepartment">Enter the Employee ID:</label>
+      <input type="text" id="empId" name="empId" required th:field="*{empId}">
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+<h1 th:text = ${result}></h1>
 </body>
 </html>
