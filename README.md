@@ -82,4 +82,25 @@ C:.
             Update.html
 ```
 
+# How to use the project?
+1. The home page is the **home.html** file where we have 5 buttons for each of the CRUD operations** (i.e Create, Read-one, Read-all, Update, Delete).**
+2. Upon clicking any of the button we will be redirected to any of the pages (**i.e Create.html, ReadOne.html, Read.html, Update.html and Delete.html)**
+3. Each and every page will have the UI to perform the CRUD operations.
 
+# Endpoints
+
+- **`/create`** : This endpoint will redirect to the Create.html file where a form will be displayed to get inputs for the new data into the database.
+
+- **`/read` **: This endpoint will redirect to Read.html file where all the data from the table will get displayed in the tabular form.
+
+- **`/update & /updateForm`** : This endpoints will be used to update the data in the table using **Update.html**. **/update** will be used to get the empId from the user and on the basis of it a form will be displayed with the values already present in the input fields. User will update the required values and then the **/updateForm** will be invoked which will update the values in the table.
+
+- **`/fetchByID`** : This endpoint will redirect to **ReadOne.html** page which will have a form input field which will accept empId and on the basis of it data is been fetched and displayed on the screen.
+
+- **`/deletebyId`** : This endpoint will redirect to **Delete.html** page which will have a form input field which will accept empId and on the basis of it data is been deleted from the table.
+
+
+# Technologies used:
+- Spring Boot
+- Hibernate ORM Framework
+- MySQL Workbench
