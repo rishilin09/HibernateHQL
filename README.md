@@ -34,7 +34,7 @@ To create a Spring Project,
 
 # **Directory Structure**
 
-Following is the directory structure of the project:
+_Following is the directory structure of the project:_
 ```
 C:.
 ├───java
