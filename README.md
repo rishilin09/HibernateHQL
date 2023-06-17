@@ -91,7 +91,7 @@ C:.
 
 - **`/create`** : This endpoint will redirect to the Create.html file where a form will be displayed to get inputs for the new data into the database.
 
-- **`/read` **: This endpoint will redirect to Read.html file where all the data from the table will get displayed in the tabular form.
+- **`/read`**: This endpoint will redirect to Read.html file where all the data from the table will get displayed in the tabular form.
 
 - **`/update & /updateForm`** : This endpoints will be used to update the data in the table using **Update.html**. **/update** will be used to get the empId from the user and on the basis of it a form will be displayed with the values already present in the input fields. User will update the required values and then the **/updateForm** will be invoked which will update the values in the table.
 
