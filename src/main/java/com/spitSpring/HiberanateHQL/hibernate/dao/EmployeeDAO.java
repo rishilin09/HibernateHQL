@@ -12,7 +12,7 @@ import com.spitSpring.HiberanateHQL.hibernate.util.HibernateUtil;
 @Service
 public class EmployeeDAO {
 
-	public List<Employee> getStudents() {
+	public List<Employee> getEmployees() {
 		try {
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 			Session session = sessionFactory.openSession();
@@ -66,7 +66,7 @@ public class EmployeeDAO {
 		}
 	}
 
-	public boolean updateEmployeeData(Employee emp) {
+	public boolean updateEmployeeById(Employee emp) {
 		Transaction transaction = null;
 		try {
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -106,6 +106,7 @@ public class EmployeeDAO {
 				return false;
 			} else {
 				String queryStr = "DELETE FROM Employee E WHERE E.empId = :employee_Id";
+				@SuppressWarnings({ "deprecation", "unchecked" })
 				Query<Employee> query = session.createQuery(queryStr);
 				query.setParameter("employee_Id", EmpId);
 				int result = query.executeUpdate();

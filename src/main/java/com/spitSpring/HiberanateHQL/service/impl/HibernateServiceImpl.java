@@ -9,6 +9,9 @@ import com.spitSpring.HiberanateHQL.hibernate.dao.EmployeeDAO;
 import com.spitSpring.HiberanateHQL.hibernate.entity.Employee;
 import com.spitSpring.HiberanateHQL.service.HibernateService;
 
+
+/* Class having Implementation of Hibernate Services */
+
 @Service
 public class HibernateServiceImpl implements HibernateService{
 	
@@ -22,7 +25,7 @@ public class HibernateServiceImpl implements HibernateService{
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		return empDao.getStudents();
+		return empDao.getEmployees();
 	}
 
 	@Override
@@ -40,7 +43,7 @@ public class HibernateServiceImpl implements HibernateService{
 
 	@Override
 	public boolean updateEmployee(Employee emp) {
-		if (empDao.updateEmployeeData(emp)) {
+		if (empDao.updateEmployeeById(emp)) {
 			return true;
 		}
 		return false;

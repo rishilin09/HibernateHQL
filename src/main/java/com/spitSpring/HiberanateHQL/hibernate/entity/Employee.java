@@ -2,6 +2,10 @@ package com.spitSpring.HiberanateHQL.hibernate.entity;
 
 import jakarta.persistence.*;
 
+
+/* This class will act as a Bean class from which 
+ * Persistent Objects will be created to insert / delete / update / fetch the table */
+
 @Entity
 @Table(name = "employee")
 public class Employee {

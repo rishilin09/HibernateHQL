@@ -1,15 +1,13 @@
 package com.spitSpring.HiberanateHQL.hibernate.util;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory = buildSessionFactory();
-
+	
+	/* This function will create a session factory having data related to database
+	 * which will be used to create a session for performing CRUD operations */
 	private static SessionFactory buildSessionFactory() {
 		try {
 			SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();

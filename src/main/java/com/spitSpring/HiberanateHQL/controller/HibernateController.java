@@ -24,12 +24,14 @@ public class HibernateController {
 		this.hibServ = hibServ;
 	}
 	
+	/* Home page with 5 buttons (Create, Read-All, Update, Read-One, Delete) */	
 	@GetMapping(value = {"/","/home"})
 	public ModelAndView HomePage() {
 		ModelAndView mav = new ModelAndView("Home");
 		return mav;
 	}
 	
+	/* To insert data into the table */	
 	@GetMapping(value = "/create")
 	public ModelAndView CreatePage() {
 		ModelAndView mav = new ModelAndView("Create");
@@ -37,6 +39,7 @@ public class HibernateController {
 		mav.addObject("result","");
 		return mav;
 	}
+	
 	
 	@PostMapping(value = "/create")
 	public ModelAndView saveEmployee(@ModelAttribute Employee emp) {
@@ -50,6 +53,8 @@ public class HibernateController {
 		return mav;
 	}
 	
+	
+	/* To fetch all the data from the table */	
 	@GetMapping(value = "/read")
 	public ModelAndView ReadPage() {
 		ModelAndView mav = new ModelAndView("Read");
@@ -62,36 +67,57 @@ public class HibernateController {
 		return mav;
 	}
 	
+	
+	/* To update a particular data in the table using empID column*/	
 	@GetMapping(value = "/update")
 	public ModelAndView UpdatePage() {
 		ModelAndView mav = new ModelAndView("Update");
 		mav.addObject("emp",new Employee());
+		mav.addObject("result", "");
+		mav.addObject("error","");
 		return mav;
 	}
 	
-	@GetMapping(value = "/deleteById")
-	public ModelAndView DeletePage() {
-		ModelAndView mav = new ModelAndView("Delete");
+	
+	@PostMapping(value = "/update")
+	public ModelAndView UpdateForm(@ModelAttribute Employee emp) {
+		ModelAndView mav = new ModelAndView("Update");
+		emp = hibServ.getEmployeebyId(emp.getEmpId());
+		if(emp != null){
+			mav.addObject("emp", emp);
+			mav.addObject("result","");
+			mav.addObject("error","");
+		} else {
+			mav.addObject("emp",new Employee());
+			mav.addObject("result","");
+			mav.addObject("error","No Data Found with this ID!!");
+		}
+		return mav;
+	}
+	
+	
+	@PostMapping(value = "/updateForm")
+	public ModelAndView UpdateSuccess(@ModelAttribute Employee emp) {
+		System.out.println(emp.toString());
+		ModelAndView mav = new ModelAndView("Update");
+		boolean isUpdated = hibServ.updateEmployee(emp);
+		if(isUpdated){
+			mav.addObject("result","DATA GOT UPDATED SUCCESSFULLY!!");
+			mav.addObject("error","");
+		} else {
+			mav.addObject("result","");
+			mav.addObject("error","DATA DIDN'T GOT UPDATED!!");
+		}
 		mav.addObject("emp",new Employee());
-		mav.addObject("result","");
 		return mav;
 	}
 	
+	/* To fetch single data from the table using empId column */	
 	@GetMapping(value = "/fetchByID")
 	public ModelAndView ReadOnePage() {
 		ModelAndView mav = new ModelAndView("ReadOne");
 		mav.addObject("emp",new Employee());
 		return mav;
-	}
-	
-	@GetMapping(value = "/fetch")
-	public Object fetchAllEmployees() {
-		List<Employee> employees = hibServ.getAllEmployees();
-		if(employees != null) {
-			return employees;
-		} else {
-			return "Cannot fetch the data!!!";
-		}
 	}
 	
 	@PostMapping(value = "/fetchByID")
@@ -108,13 +134,13 @@ public class HibernateController {
 		return mav;
 	}
 	
-	@PutMapping(value = "/update",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Object updateEmployeeById(@RequestBody Employee emp) {
-		if(hibServ.updateEmployee(emp)){
-			return "DATA GOT UPDATED SUCCESSFULLY!!";
-		} else {
-			return "DATA DIDN'T GOT UPDATED!!";
-		}
+	/* To delete a particular data from the table using empId column */
+	@GetMapping(value = "/deleteById")
+	public ModelAndView DeletePage() {
+		ModelAndView mav = new ModelAndView("Delete");
+		mav.addObject("emp",new Employee());
+		mav.addObject("result","");
+		return mav;
 	}
 	
 	@PostMapping(value = "/deleteById")
@@ -128,31 +154,5 @@ public class HibernateController {
 		}
 		return mav;
 	}
-	
-//	@DeleteMapping(value = "/deleteById")
-//	public Object deleteEmployeeById(@RequestParam(name = "id") String Id) {
-//		if(hibServ.deleteEmployeebyId(Id)){
-//			return "DATA GOT DELETED SUCCESSFULLY!!!";
-//		} else {
-//			return "DATA DIDN'T GOT DELETED!!";
-//		}
-//	}
 }
-
-
-//@GetMapping(value = "/readOne")
-//public ModelAndView readOnePage(Model model) {
-//    ModelAndView mav = new ModelAndView("ReadOne");
-//    mav.addObject("oneemp", new Employee());
-//    return mav;
-//}
-//
-//@PostMapping(value = "/readOne")
-//public ModelAndView getReadOnePage(@RequestParam(name = "id") String id, Model model) {
-//    Employee retrievedEmployee = hibServ.getEmployeebyId(id);
-//    model.addAttribute("oneemp", retrievedEmployee);
-//    ModelAndView mav = new ModelAndView("ReadOne");
-//    mav.addObject("id", id);
-//    return mav;
-//}
 

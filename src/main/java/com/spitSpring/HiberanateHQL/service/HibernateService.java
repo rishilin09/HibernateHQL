@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.spitSpring.HiberanateHQL.hibernate.entity.Employee;
 
+
+/* Interface for the Hibernate Services */
+
 public interface HibernateService {
 
 	public List<Employee> getAllEmployees();
