@@ -83,7 +83,7 @@ C:.
 ```
 
 # How to use the project?
-1. The home page is the **home.html** file where we have 5 buttons for each of the CRUD operations** (i.e Create, Read-one, Read-all, Update, Delete).**
+1. The home page is the **home.html** file where we have 5 buttons for each of the CRUD operations **(i.e Create, Read-one, Read-all, Update, Delete).**
 2. Upon clicking any of the button we will be redirected to any of the pages (**i.e Create.html, ReadOne.html, Read.html, Update.html and Delete.html)**
 3. Each and every page will have the UI to perform the CRUD operations.
 
