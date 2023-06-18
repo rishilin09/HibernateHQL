@@ -104,3 +104,4 @@ C:.
 - Spring Boot
 - Hibernate ORM Framework
 - MySQL Workbench
+- Thymeleaf
